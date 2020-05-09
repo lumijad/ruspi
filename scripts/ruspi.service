@@ -1,0 +1,17 @@
+[Unit]
+Description=Simple Rust Server
+After=network.target
+
+[Service]
+Type=simple
+EnvironmentFile=/opt/ruspi/.env
+User=ruspi
+Group=ruspi
+ExecStart=/opt/ruspi/webserver
+ExecStartPost=/bin/echo "Server gestartet"
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+

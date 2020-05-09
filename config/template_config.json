@@ -1,0 +1,28 @@
+{
+  "pages": [
+    {
+      "name": "index",
+      "params": {
+        "layout": "components/app-layout",
+        "title": "Ruspi",
+        "description": "ruspi.dev is an experimental website used written in the programming language rust"
+      }
+    },
+    {
+      "name": "about",
+      "params": {
+        "layout": "components/app-layout",
+        "title": "Ruspi Webserver",
+        "description": "ruspi.dev is an experimental website used written in the programming language rust"
+      }
+    },
+    {
+      "name": "error_404",
+      "params": {
+        "layout": "components/app-layout",
+        "title": "Ruspi Webserver: Page not found",
+        "description": "ruspi.dev is an experimental website used written in the programming language rust"
+      }
+    }
+  ]
+}

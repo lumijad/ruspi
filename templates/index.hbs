@@ -1,0 +1,85 @@
+{{#*inline "page"}}
+    <h1 class="h3 mb-4 text-gray-800">Welcome to ruspi.dev</h1>
+    <h4></h4>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card mb-4 py-3 border-left-success">
+                <div class="card-body">
+                    ruspi.dev is an experimental website used to document software written in the programming language
+                    rust for the Raspberry PI.
+                    <br>
+                    The first project, which is planned, is to simplify the administration of sqlite databases, which are installed on different Raspberry PIs.
+                    <br>
+                    We will make all projects available on GitHub.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <!-- warp -->
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Webserver</h6>
+                </div>
+                <div class="card-body">
+                    <p>
+                        This web server is also written in rust and is based on the web server framework warp.
+                        Warp is a easy, composable, web server framework. <br>
+                        The fundamental building block of warp is the Filter: they can be combined and composed to
+                        express
+                        rich requirements on requests.
+                    </p>
+
+                    Warp is based on <a href="https://hyper.rs/">hyper</a> and supports automatically:
+                    <ul>
+                        <li>HTTP/1</li>
+                        <li>HTTP/2</li>
+                        <li>Asynchronous</li>
+                    </ul>
+                    and is one of the fastest HTTP implementations in the world.
+                    <br>
+                    <hr>
+
+                    Links:
+                    <ul>
+                        <li><a href="https://docs.rs/warp/">Documentation</a></li>
+                        <li><a href="https://github.com/seanmonstar/warp">GitHub</a></li>
+                        <li><a href="https://crates.io/crates/warp">Crate</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Accordion -->
+                <a href="#collapseWarpSource" class="d-block card-header py-3" data-toggle="collapse" role="button"
+                   aria-expanded="true" aria-controls="collapseWarpSource">
+                    <h6 class="m-0 font-weight-bold text-primary">A "Hello World" web server based on warp.</h6>
+                </a>
+                <!-- Card Content - Collapse -->
+                <div class="collapse show" id="collapseWarpSource">
+                    <div class="card-body">
+                        <pre><code class="rust">
+#![deny(warnings)]
+use warp::Filter;
+
+#[tokio::main]
+async fn main() {
+    // Match any request and return hello world!
+    let routes = warp::any().map(|| "Hello, World!");
+
+    warp::serve(routes).run(([127, 0, 0, 1], 3030)).await;
+}
+
+                        </code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{{/inline}}
+{{~> (layout)~}}
