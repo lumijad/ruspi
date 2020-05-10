@@ -9,6 +9,38 @@
       }
     },
     {
+      "name": "hello-world",
+      "params": {
+        "layout": "components/app-layout",
+        "title": "Hello World based on the warp web framework.",
+        "description": "Hello World, written in the ruts programming language. Based on the web server framework warp."
+      }
+    },
+    {
+      "name": "complex-set-of-routes",
+      "params": {
+        "layout": "components/app-layout",
+        "title": "Complex set of routes for the warp framework.",
+        "description": "A simple web server written in the ruts programming language. Based on the web server framework warp."
+      }
+    },
+    {
+      "name": "jwt",
+      "params": {
+        "layout": "components/app-layout",
+        "title": "JSON Web Token",
+        "description": "JSON Web-Token authorization with the warp web server framework."
+      }
+    },
+    {
+      "name": "tls",
+      "params": {
+        "layout": "components/app-layout",
+        "title": "Transport layer security",
+        "description": "Transport layer security (TLS) with the warp web server framework."
+      }
+    },
+    {
       "name": "about",
       "params": {
         "layout": "components/app-layout",

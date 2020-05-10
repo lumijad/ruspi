@@ -1,0 +1,67 @@
+{{#*inline "page"}}
+    <h1 class="h3 mb-4 text-gray-800">A simple webserver based on warp</h1>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card mb-4 py-3 border-left-success">
+                <div class="card-body">
+                    A simple hello world program with the web server framework warp.
+                    <br>
+                    The web server uses port 8080 on the localhost address 127.0.0.1.
+                    All requests are processed by the same filter and return "Hello World".
+                    <br>
+                    The website can be opened in any browser with the URL http://localhost.
+                    <br>It can also be called with the command line tool cURL:
+                    <pre>
+                        <code class="shell">
+cURL examples:
+
+Only payload
+curl localhost:8080
+
+With header
+curl -I -localhost:8080
+
+Windows 10 supports curl via powershell:
+powershell curl -Uri http://localhost:8080
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Accordion -->
+                <a href="#collapseWarpSource" class="d-block card-header py-3" data-toggle="collapse" role="button"
+                   aria-expanded="true" aria-controls="collapseWarpSource">
+                    <h6 class="m-0 font-weight-bold text-primary">A "Hello World" web server based on warp.</h6>
+                </a>
+                <!-- Card Content - Collapse -->
+                <div class="collapse show" id="collapseWarpSource">
+                    <div class="card-body">
+                        <pre><code class="rust">
+use warp::Filter;
+
+#[tokio::main]
+async fn main() {
+    // Match any request and return hello world!
+    let routes = warp::any().map(|| "Hello, World!");
+
+    warp::serve(routes).run(([127, 0, 0, 1], 8080)).await;
+}
+                        </code></pre>
+                    </div>
+                    <a href="https://github.com/lumijad/ruspi-examples/blob/master/ruspi-warp/src/hello/main.rs"
+                       class="btn btn-sm header-btn">
+                        <i class="fa fa-github-alt"></i>
+                        <span>View on GitHub</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{{/inline}}
+{{~> (layout)~}}

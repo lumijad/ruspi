@@ -1,0 +1,132 @@
+{{#*inline "page"}}
+    <h1 class="h3 mb-4 text-gray-800">Transport layer security (TLS) with the warp web server framework.</h1>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card mb-4 py-3 border-left-success">
+                <div class="card-body">
+                    Transport Layer Security (TLS) are cryptographic protocols designed to provide communications security over a computer network.
+                    Websites can use TLS to secure all communications between their servers and web browsers.
+                    <br><br>
+                    Hypertext Transfer Protocol Secure (HTTPS) is an extension of the Hypertext Transfer Protocol (HTTP).
+                    In HTTPS, the communication protocol is encrypted using Transport Layer Security (TLS) or, formerly, its predecessor, Secure Sockets Layer (SSL).
+                    The authentication aspect of HTTPS requires a trusted third party (CA) to sign server-side digital certificates.
+                    E.G. https://letsencrypt.org/
+                    <br><br>
+                    For tests, you can use self-signed tls certificates.
+                    When using a self-signed certificate, there is no chain of trust. The certificate has signed itself.
+                    The web browser will then issue a warning, telling you that the web site certificate cannot be verified.
+                    Therefore, you should not use self-signed certificates for professional use, as your visitors will not trust your web site to be safe.
+                    <br><br>
+                    You can create a self signed certificate with <a href="https://www.openssl.org/">openssl</a>.
+                    <pre><code class="rust">
+openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365 -nodes
+                    </code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Accordion -->
+                <a href="#collapseWarpSource" class="d-block card-header py-3" data-toggle="collapse" role="button"
+                   aria-expanded="true" aria-controls="collapseWarpSource">
+                    <h6 class="m-0 font-weight-bold text-primary">Secure communication (HTTPS/TLS) with warp</h6>
+                </a>
+                <!-- Card Content - Collapse -->
+                <div class="collapse show" id="collapseWarpSource">
+                    <div class="card-body">
+                        <pre><code class="rust">
+use std::env;
+use warp::Filter;
+
+fn get_routes() -> impl Filter<Extract=impl warp::Reply, Error=warp::Rejection> + Clone {
+    warp::any()
+        .and(warp::get())
+        .and(warp::path::param())
+        .and(warp::header("user-agent"))
+        .map(|param: String, agent: String| {
+            format!("Hello {}, whose agent is {}", param, agent)
+        })
+}
+
+#[tokio::main]
+async fn main() {
+    // https://github.com/seanmonstar/pretty-env-logger
+    env::set_var("RUST_LOG", "info,tls=debug");
+
+    pretty_env_logger::init();
+
+    println!("Starting warp with the bind address 127.0.0.1:8443");
+
+    warp::serve(get_routes().with(warp::log("warp-server")))
+        .tls().cert_path("tls/cert.pem")
+        .key_path("tls/key.pem").run(([127, 0, 0, 1], 8443)).await;
+}
+                        </code></pre>
+                    </div>
+                    <a href="https://github.com/lumijad/ruspi-examples/blob/master/ruspi-warp/src/tls/main.rs"
+                       class="btn btn-sm header-btn">
+                        <i class="fa fa-github-alt"></i>
+                        <span>View on GitHub</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Accordion -->
+                <a href="#collapseTLSTests" class="d-block card-header py-3" data-toggle="collapse" role="button"
+                   aria-expanded="true" aria-controls="collapseTLSTests">
+                    <h6 class="m-0 font-weight-bold text-primary">Test your secure server with cURL and rust</h6>
+                </a>
+                <!-- Card Content - Collapse -->
+                <div class="collapse show" id="collapseTLSTests">
+                    <div class="card-body">
+                        The -k switch allows insecure (with a self signed certificate) server connections.
+                        <pre><code class="rust">
+curl -k https://127.0.0.1:8443/warp
+                        </code></pre>
+                        <pre><code class="rust">
+#[cfg(test)]
+mod tests {
+    use warp::test::request;
+
+    use crate::get_routes;
+
+    #[tokio::test]
+    async fn test_server() {
+        let resp = request()
+            .method("GET")
+            .header("user-agent", "test")
+            .path("https://127.0.0.1:8443/warp")
+            .reply(&get_routes())
+            .await;
+
+        let body = std::str::from_utf8(resp.body()).unwrap().to_string();
+        println!("{}", body);
+
+        assert_eq!(resp.status(), 200);
+    }
+}
+                        </code></pre>
+                    </div>
+                    <a href="https://github.com/lumijad/ruspi-examples/blob/master/ruspi-warp/src/tls/main.rs"
+                       class="btn btn-sm header-btn">
+                        <i class="fa fa-github-alt"></i>
+                        <span>View on GitHub</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{{/inline}}
+{{~> (layout)~}}

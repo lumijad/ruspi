@@ -8,9 +8,21 @@
       <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
     </configurations>
   </component>
+  <component name="CargoProjects">
+    <cargoProject FILE="$PROJECT_DIR$/Cargo.toml" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="3b4528e8-2f84-4e3e-84ca-eff9c0a64b64" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/complex-set-of-routes.hbs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/hello-world.hbs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/jwt.hbs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/tls.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/ruspi.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ruspi.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/template_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/template_config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/install.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/install.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/components/sidebar.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/templates/components/sidebar.hbs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.hbs" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.hbs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +35,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="MacroExpansionManager">
+    <option name="directoryName" value="v43aaq68" />
+  </component>
   <component name="ProjectId" id="1bg5ZzVwkIpS745ploFXrHSqwid" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -33,12 +48,37 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates" />
+    <property name="org.rust.cargo.project.model.PROJECT_DISCOVERY" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\ruspi.dev\ruspi\templates" />
       <recent name="D:\ruspi.dev\ruspi" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Run webserver" type="CargoCommandRunConfiguration" factoryName="Cargo Command" temporary="true">
+      <option name="channel" value="DEFAULT" />
+      <option name="command" value="run --package webserver --bin webserver" />
+      <option name="allFeatures" value="false" />
+      <option name="nocapture" value="false" />
+      <option name="emulateTerminal" value="false" />
+      <option name="backtrace" value="SHORT" />
+      <option name="workingDirectory" value="file://$PROJECT_DIR$" />
+      <envs />
+      <method v="2">
+        <option name="CARGO.BUILD_TASK_PROVIDER" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Cargo Command.Run webserver" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="RustProjectSettings">
+    <option name="toolchainHomeDirectory" value="$USER_HOME$/.cargo/bin" />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -47,8 +87,96 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1589040955969</updated>
-      <workItem from="1589040957052" duration="79000" />
+      <workItem from="1589040957052" duration="11834000" />
     </task>
+    <task id="LOCAL-00001" summary="initial commit">
+      <created>1589041113004</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1589041113004</updated>
+    </task>
+    <task id="LOCAL-00002" summary="github urls altered">
+      <created>1589041290919</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1589041290919</updated>
+    </task>
+    <task id="LOCAL-00003" summary="some helper scripts created">
+      <created>1589095864759</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1589095864759</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="initial commit" />
+    <MESSAGE value="github urls altered" />
+    <MESSAGE value="some helper scripts created" />
+    <option name="LAST_COMMIT_MESSAGE" value="some helper scripts created" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="-1634" y="480" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1589095755276">
+      <screen x="-2560" y="0" width="2560" height="1440" />
+    </state>
+    <state x="-1634" y="480" key="#com.intellij.fileTypes.FileTypeChooser/72.0.2488.1440/-2560.0.2560.1440/2560.0.2560.1440@-2560.0.2560.1440" timestamp="1589095755276" />
+    <state x="-1854" y="127" key="CommitChangelistDialog2" timestamp="1589095864468">
+      <screen x="-2560" y="0" width="2560" height="1440" />
+    </state>
+    <state x="-1854" y="127" key="CommitChangelistDialog2/72.0.2488.1440/-2560.0.2560.1440/2560.0.2560.1440@-2560.0.2560.1440" timestamp="1589095864468" />
+    <state x="758" y="127" key="CommitChangelistDialog2/72.0.2488.1440/-2560.0.2560.1440/2560.0.2560.1440@72.0.2488.1440" timestamp="1589041290647" />
+    <state x="990" y="334" key="FileChooserDialogImpl" timestamp="1589105005038">
+      <screen x="72" y="0" width="2488" height="1440" />
+    </state>
+    <state x="990" y="334" key="FileChooserDialogImpl/72.0.2488.1440/-2560.0.2560.1440/2560.0.2560.1440@72.0.2488.1440" timestamp="1589105005038" />
+    <state width="2421" height="472" key="GridCell.Tab.0.bottom" timestamp="1589120355397">
+      <screen x="72" y="0" width="2488" height="1440" />
+    </state>
+    <state width="2421" height="472" key="GridCell.Tab.0.bottom/72.0.2488.1440/-2560.0.2560.1440/2560.0.2560.1440@72.0.2488.1440" timestamp="1589120355397" />
+    <state width="2421" height="472" key="GridCell.Tab.0.center" timestamp="1589120355397">
+      <screen x="72" y="0" width="2488" height="1440" />
+    </state>
+    <state width="2421" height="472" key="GridCell.Tab.0.center/72.0.2488.1440/-2560.0.2560.1440/2560.0.2560.1440@72.0.2488.1440" timestamp="1589120355397" />
+    <state width="2421" height="472" key="GridCell.Tab.0.left" timestamp="1589120355397">
+      <screen x="72" y="0" width="2488" height="1440" />
+    </state>
+    <state width="2421" height="472" key="GridCell.Tab.0.left/72.0.2488.1440/-2560.0.2560.1440/2560.0.2560.1440@72.0.2488.1440" timestamp="1589120355397" />
+    <state width="2421" height="472" key="GridCell.Tab.0.right" timestamp="1589120355397">
+      <screen x="72" y="0" width="2488" height="1440" />
+    </state>
+    <state width="2421" height="472" key="GridCell.Tab.0.right/72.0.2488.1440/-2560.0.2560.1440/2560.0.2560.1440@72.0.2488.1440" timestamp="1589120355397" />
+    <state width="2421" height="472" key="GridCell.Tab.1.bottom" timestamp="1589120355328">
+      <screen x="72" y="0" width="2488" height="1440" />
+    </state>
+    <state width="2421" height="472" key="GridCell.Tab.1.bottom/72.0.2488.1440/-2560.0.2560.1440/2560.0.2560.1440@72.0.2488.1440" timestamp="1589120355328" />
+    <state width="2421" height="472" key="GridCell.Tab.1.center" timestamp="1589120355328">
+      <screen x="72" y="0" width="2488" height="1440" />
+    </state>
+    <state width="2421" height="472" key="GridCell.Tab.1.center/72.0.2488.1440/-2560.0.2560.1440/2560.0.2560.1440@72.0.2488.1440" timestamp="1589120355328" />
+    <state width="2421" height="472" key="GridCell.Tab.1.left" timestamp="1589120355328">
+      <screen x="72" y="0" width="2488" height="1440" />
+    </state>
+    <state width="2421" height="472" key="GridCell.Tab.1.left/72.0.2488.1440/-2560.0.2560.1440/2560.0.2560.1440@72.0.2488.1440" timestamp="1589120355328" />
+    <state width="2421" height="472" key="GridCell.Tab.1.right" timestamp="1589120355328">
+      <screen x="72" y="0" width="2488" height="1440" />
+    </state>
+    <state width="2421" height="472" key="GridCell.Tab.1.right/72.0.2488.1440/-2560.0.2560.1440/2560.0.2560.1440@72.0.2488.1440" timestamp="1589120355328" />
+    <state x="1115" y="273" key="RollbackChangesDialog" timestamp="1589119695922">
+      <screen x="72" y="0" width="2488" height="1440" />
+    </state>
+    <state x="1115" y="273" key="RollbackChangesDialog/72.0.2488.1440/-2560.0.2560.1440/2560.0.2560.1440@72.0.2488.1440" timestamp="1589119695922" />
+    <state x="-1906" y="321" key="Vcs.Push.Dialog.v2" timestamp="1589095876097">
+      <screen x="-2560" y="0" width="2560" height="1440" />
+    </state>
+    <state x="-1906" y="321" key="Vcs.Push.Dialog.v2/72.0.2488.1440/-2560.0.2560.1440/2560.0.2560.1440@-2560.0.2560.1440" timestamp="1589095876097" />
+    <state x="708" y="321" key="Vcs.Push.Dialog.v2/72.0.2488.1440/-2560.0.2560.1440/2560.0.2560.1440@72.0.2488.1440" timestamp="1589041336024" />
+    <state x="164" y="92" width="2304" height="1256" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1589119858113">
+      <screen x="72" y="0" width="2488" height="1440" />
+    </state>
+    <state x="164" y="92" width="2304" height="1256" key="com.intellij.history.integration.ui.views.FileHistoryDialog/72.0.2488.1440/-2560.0.2560.1440/2560.0.2560.1440@72.0.2488.1440" timestamp="1589119858113" />
   </component>
 </project>
