@@ -25,6 +25,70 @@
       }
     },
     {
+      "name": "web-socket-upgrade",
+      "params": {
+        "layout": "components/app-layout",
+        "title": "Web socket upgrade",
+        "description": "Web socket upgrade with the warp web server framework."
+      }
+    },
+    {
+      "name": "web-socket-chat-app",
+      "params": {
+        "layout": "components/app-layout",
+        "title": "Web socket chat app",
+        "description": "Web socket chat app with the warp web server framework."
+      }
+    },
+    {
+      "name": "sse-basics",
+      "params": {
+        "layout": "components/app-layout",
+        "title": "Server side events (basics)",
+        "description": "Server side events (basics) with the warp web server framework."
+      }
+    },
+    {
+      "name": "sse-chat-app",
+      "params": {
+        "layout": "components/app-layout",
+        "title": "Server side events chat application",
+        "description": "Server side events chat application with the warp web server framework."
+      }
+    },
+    {
+      "name": "routing-static-files",
+      "params": {
+        "layout": "components/app-layout",
+        "title": "Serve static files",
+        "description": "Serve static files with the warp web server framework."
+      }
+    },
+    {
+      "name": "routing-paging",
+      "params": {
+        "layout": "components/app-layout",
+        "title": "Serve page withe handlebars and warp",
+        "description": "Serve page with handlebars the warp web server framework."
+      }
+    },
+    {
+      "name": "jwt",
+      "params": {
+        "layout": "components/app-layout",
+        "title": "JSON Web Token",
+        "description": "JSON Web-Token authorization with the warp web server framework."
+      }
+    },
+    {
+      "name": "jwt",
+      "params": {
+        "layout": "components/app-layout",
+        "title": "JSON Web Token",
+        "description": "JSON Web-Token authorization with the warp web server framework."
+      }
+    },
+    {
       "name": "jwt",
       "params": {
         "layout": "components/app-layout",

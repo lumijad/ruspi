@@ -1,5 +1,3 @@
-sudo useradd -M ruspi
-
 sudo systemctl daemon-reload
 
 sudo systemctl enable ruspi.service
