@@ -65,7 +65,7 @@ fn user_connected(
 }
 
 fn user_message(my_id: usize, msg: String, users: &Users) {
-    let new_msg = format!("<User#{}>: {}", my_id, msg);
+    let new_msg = format!("[User#{}]: {}", my_id, msg);
 
     // New message from this user, send it to everyone else (except same uid)...
     //
@@ -101,9 +101,10 @@ pub fn get_sse_filters() -> impl Filter<Extract=impl warp::Reply, Error=warp::Re
     // Turn our "state" into a new Filter...
     let users = warp::any().map(move || users.clone());
 
-    // POST /chat -> send message
-    let chat_send = warp::path!("sse" / "chat")
-        .and(warp::post())
+    // POST /sse/chat -> send message
+    let chat_send = warp::post()
+        .and(warp::path("sse"))
+        .and(warp::path("chat"))
         .and(warp::path::param::<usize>())
         .and(warp::body::content_length_limit(500))
         .and(
@@ -119,14 +120,14 @@ pub fn get_sse_filters() -> impl Filter<Extract=impl warp::Reply, Error=warp::Re
             warp::reply()
         });
 
-    // GET /chat -> messages stream
-    let chat_recv = warp::path!("sse" / "chat").and(warp::get()).and(users).map(|users| {
+    // GET /sse/chat -> messages stream
+    let chat_recv = warp::get().and(warp::path!("sse" / "chat")).and(users).map(|users| {
         // reply using server-sent events
         let stream = user_connected(users);
         warp::sse::reply(warp::sse::keep_alive().stream(stream))
     });
 
-    let routes = ticks.or(chat_send).or(chat_recv);
+    let routes = chat_send.or(chat_recv).or(ticks);
 
     routes
 }

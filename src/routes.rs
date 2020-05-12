@@ -33,8 +33,8 @@ pub fn static_resources() -> impl Filter<Extract=impl warp::Reply, Error=warp::R
 pub fn get_page_filters() -> impl Filter<Extract=impl warp::Reply, Error=warp::Rejection> + Clone {
 
      // /*  all get requests with a parameter
-     warp::any()
-        .and(warp::get())
+     warp::get()
+        .and(warp::any())
         .and(warp::path::param())
         .and_then(render)
     // / all get request without a parameter will be mapped to index
@@ -46,5 +46,5 @@ pub fn get_page_filters() -> impl Filter<Extract=impl warp::Reply, Error=warp::R
 }
 
 pub fn get_routes() -> impl Filter<Extract=impl warp::Reply, Error=warp::Rejection> + Clone {
-    static_resources().or(get_page_filters()).or(get_sse_filters())
+    static_resources().or(get_sse_filters()).or(get_page_filters())
 }

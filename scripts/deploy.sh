@@ -1,3 +1,5 @@
+git pull
+cargo build --release
 systemctl stop ruspi.service
 sleep 2
 

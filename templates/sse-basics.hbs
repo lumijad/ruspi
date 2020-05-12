@@ -1,18 +1,85 @@
 {{#*inline "page"}}
+
     <h1 class="h3 mb-4 text-gray-800">Server side events (basics)</h1>
 
     <div class="row">
         <div class="col-lg-12">
             <div class="card mb-4 py-3 border-left-success">
                 <div class="card-body">
-                    <pre>
-                        <code class="shell">
-                        </code>
-                    </pre>
+                    Press the "Start" button to trigger an event on the server side every second and show the tick
+                    counter in the edit field.
+                    <br>
+                    <input type="number" id="sse_ctl" value="" readonly>
+                    <br>
+                    <button id="start" style="margin-top: 10px" class="btn btn-success" onclick="start()">Start</button>
+                    Press the "Start" button to begin.
+                    <br>
+                    <button id="stop" style="margin-top: 10px" class="btn btn-danger" onclick="stop()" disabled>Stop
+                    </button>
+                    Press the "Stop" button to finish.
                 </div>
             </div>
         </div>
     </div>
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Accordion -->
+                <a href="#collapseJsSource" class="d-block card-header py-3" data-toggle="collapse" role="button"
+                   aria-expanded="true" aria-controls="collapseJsSource">
+                    <h6 class="m-0 font-weight-bold text-primary">Java script code.</h6>
+                </a>
+                <!-- Card Content - Collapse -->
+                <div class="collapse show" id="collapseJsSource">
+                    <div class="card-body">
+                        Source code:
+                        <pre>
+                        <code class="javascript">
+let eventSource;
+
+function stop() {
+    eventSource.close();
+    console.log("eventSource.close()");
+    document.getElementById("start").disabled = false;
+    document.getElementById("stop").disabled = true;
+}
+
+function start() {
+    document.getElementById("start").disabled = true;
+    document.getElementById("stop").disabled = false;
+
+
+    var uri = location.origin + '/sse/ticks';
+    eventSource = new EventSource(uri);
+
+    eventSource.onopen = function() {
+        eventSource.value ="Connected"
+    }
+
+    eventSource.onmessage = function(msg) {
+        console.log(msg)
+        message(msg.data);
+    }
+}
+
+function message(data) {
+    sse_ctl.value=data;
+}
+                        </code>
+                    </pre>
+                    </div>
+                    <a href="https://github.com/lumijad/ruspi-examples/blob/master/ruspi-warp/src/sse/main.rs"
+                       class="btn btn-sm header-btn">
+                        <i class="fa fa-github-alt"></i>
+                        <span>View on GitHub</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <div class="row">
         <div class="col-lg-12">
@@ -25,7 +92,41 @@
                 <!-- Card Content - Collapse -->
                 <div class="collapse show" id="collapseWarpSource">
                     <div class="card-body">
+                        Source code:
                         <pre><code class="rust">
+use futures::StreamExt;
+use std::convert::Infallible;
+use std::time::Duration;
+use tokio::time::interval;
+use warp::{sse::ServerSentEvent, Filter};
+
+// create server-sent event
+fn sse_counter(counter: u64) -> Result<impl ServerSentEvent, Infallible> {
+    Ok(warp::sse::data(counter))
+}
+
+#[tokio::main]
+async fn main() {
+    pretty_env_logger::init();
+
+    let routes = warp::path!("sse", "ticks").and(warp::get()).map(|| {
+        let mut counter: u64 = 0;
+        // create server event source
+        let event_stream = interval(Duration::from_secs(1)).map(move |_| {
+            counter += 1;
+            sse_counter(counter)
+        });
+        // reply using server-sent events
+        warp::sse::reply(event_stream)
+    }).or(warp::path::end().map(|| {
+        warp::http::Response::builder()
+            .header("content-type", "text/html; charset=utf-8")
+            .body(INDEX_HTML)
+    }));
+
+
+    warp::serve(routes).run(([127, 0, 0, 1], 8080)).await;
+}
                         </code></pre>
                     </div>
                     <a href="https://github.com/lumijad/ruspi-examples/blob/master/ruspi-warp/src/sse/main.rs"
@@ -37,5 +138,40 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+let eventSource;
+
+function stop() {
+    eventSource.close();
+    console.log("eventSource.close()");
+    document.getElementById("start").disabled = false;
+    document.getElementById("stop").disabled = true;
+}
+
+function start() {
+    document.getElementById("start").disabled = true;
+    document.getElementById("stop").disabled = false;
+
+
+    var uri = location.origin + '/sse/ticks';
+    eventSource = new EventSource(uri);
+
+    eventSource.onopen = function() {
+        eventSource.value ="Connected"
+    }
+
+    eventSource.onmessage = function(msg) {
+        console.log(msg)
+        message(msg.data);
+    }
+}
+
+function message(data) {
+    sse_ctl.value=data;
+}
+
+
+
+    </script>
 {{/inline}}
 {{~> (layout)~}}
