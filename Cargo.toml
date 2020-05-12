@@ -17,3 +17,4 @@ handlebars = { version = "3.0", features = ["dir_source"] }
 lazy_static = "1.4"
 walkdir = "2"
 futures = { version = "0.3", default-features = false, features = ["alloc"] }
+bytes = "0.5"

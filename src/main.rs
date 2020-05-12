@@ -5,6 +5,7 @@ use dotenv::dotenv;
 
 mod routes;
 mod server;
+mod sse;
 mod template_engine;
 mod utils;
 

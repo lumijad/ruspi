@@ -1632,6 +1632,7 @@ dependencies = [
 name = "webserver"
 version = "0.1.0"
 dependencies = [
+ "bytes",
  "dotenv",
  "futures",
  "handlebars",

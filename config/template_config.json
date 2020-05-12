@@ -57,7 +57,7 @@
       }
     },
     {
-      "name": "routing-static-files",
+      "name": "serve-static-files",
       "params": {
         "layout": "components/app-layout",
         "title": "Serve static files",
@@ -65,27 +65,11 @@
       }
     },
     {
-      "name": "routing-paging",
+      "name": "partials",
       "params": {
         "layout": "components/app-layout",
         "title": "Serve page withe handlebars and warp",
         "description": "Serve page with handlebars the warp web server framework."
-      }
-    },
-    {
-      "name": "jwt",
-      "params": {
-        "layout": "components/app-layout",
-        "title": "JSON Web Token",
-        "description": "JSON Web-Token authorization with the warp web server framework."
-      }
-    },
-    {
-      "name": "jwt",
-      "params": {
-        "layout": "components/app-layout",
-        "title": "JSON Web Token",
-        "description": "JSON Web-Token authorization with the warp web server framework."
       }
     },
     {

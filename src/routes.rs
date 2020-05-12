@@ -4,6 +4,7 @@ use warp::{self, Filter};
 
 use crate::template_engine::{render};
 use crate::utils::{get_base_dir};
+use crate::sse::get_sse_filters;
 
 pub fn static_resources() -> impl Filter<Extract=impl warp::Reply, Error=warp::Rejection> + Clone {
 
@@ -45,5 +46,5 @@ pub fn get_page_filters() -> impl Filter<Extract=impl warp::Reply, Error=warp::R
 }
 
 pub fn get_routes() -> impl Filter<Extract=impl warp::Reply, Error=warp::Rejection> + Clone {
-    static_resources().or(get_page_filters())
+    static_resources().or(get_page_filters()).or(get_sse_filters())
 }
