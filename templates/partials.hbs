@@ -5,8 +5,34 @@
     <div class="col-lg-12">
         <div class="card mb-4 py-3 border-left-success">
             <div class="card-body">
+                <p>
+                    Handlebars is a modern and extensible templating solution originally created in the JavaScript world.
+                    It's used by many popular frameworks like Ember.js and Chaplin. It's also ported to some other platforms such as Java.
+                    For the programming language rust exists now also a implementation. Hier is a link the the documentation:
+                    <a href="https://docs.rs/handlebars/3.0.1/handlebars/">Handlebars for rust</a>
+                </p>
+
+                <b>Handlebars quick start with rust</b>
                     <pre>
-                        <code class="shell">
+                        <code class="rust">
+use std::collections::BTreeMap;
+use handlebars::Handlebars;
+
+fn main() {
+  // create the handlebars registry
+  let mut handlebars = Handlebars::new();
+
+  // register the template. The template string will be verified and compiled.
+  let source = "hello {{world}}";
+  assert!(handlebars.register_template_string("t1", source).is_ok());
+
+  // Prepare some data.
+  //
+  // The data type should implements `serde::Serialize`
+  let mut data = BTreeMap::new();
+  data.insert("world".to_string(), "世界!".to_string());
+  assert_eq!(handlebars.render("t1", &data).unwrap(), "hello 世界!");
+}
                         </code>
                     </pre>
             </div>
@@ -25,7 +51,65 @@
             <!-- Card Content - Collapse -->
             <div class="collapse show" id="collapseWarpSource">
                 <div class="card-body">
+                    This web site is built with handlebars too. Which is ease to use together with warp.
                         <pre><code class="rust">
+use std::sync::Arc;
+
+use handlebars::Handlebars;
+use serde::Serialize;
+use serde_json::json;
+use warp::Filter;
+
+struct WithTemplate&lt;T: Serialize> {
+    name: &'static str,
+    value: T,
+}
+
+fn render&lt;T>(template: WithTemplate&lt;T>, hbs: Arc&lt;Handlebars>) -> impl warp::Reply
+    where
+        T: Serialize,
+{
+    let render = hbs
+        .render(template.name, &template.value)
+        .unwrap_or_else(|err| err.to_string());
+    warp::reply::html(render)
+}
+
+#[tokio::main]
+async fn main() {
+    let template = "&lt;!DOCTYPE html>
+                    &lt;html>
+                      &lt;head>
+                        &lt;title>Warp Handlebars template example&lt;/title>
+                      &lt;/head>
+                      &lt;body>
+                        &lt;h1>Hello {{user}}!&lt;/h1>
+                      &lt;/body>
+                    &lt;/html>";
+
+    let mut hb = Handlebars::new();
+    // register the template
+    hb.register_template_string("template.html", template)
+        .unwrap();
+
+    // Turn Handlebars instance into a Filter so we can combine it
+    // easily with others...
+    let hb = Arc::new(hb);
+
+    // Create a reusable closure to render template
+    let handlebars = move |with_template| render(with_template, hb.clone());
+
+    //GET /
+    let route = warp::get()
+        .and(warp::path::end())
+        .map(|| WithTemplate {
+            name: "template.html",
+            value: json!({"user" : "Warp"}),
+        })
+        .map(handlebars);
+
+    warp::serve(route).run(([127, 0, 0, 1], 3030)).await;
+}
                         </code></pre>
                 </div>
                 <a href="https://github.com/lumijad/ruspi-examples/blob/master/ruspi-warp/src/handlebars/main.rs"

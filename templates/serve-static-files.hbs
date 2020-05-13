@@ -1,41 +1,73 @@
 {{#*inline "page"}}
-<h1 class="h3 mb-4 text-gray-800">Serve static pages with warp</h1>
+    <h1 class="h3 mb-4 text-gray-800">Serve static pages with warp</h1>
 
-<div class="row">
-    <div class="col-lg-12">
-        <div class="card mb-4 py-3 border-left-success">
-            <div class="card-body">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card mb-4 py-3 border-left-success">
+                <div class="card-body">
+                    <p>The warp::filters::fs::dir function can be used to serve "static files" from a directory.
+                        By far the most common pattern of serving static files is for GET requests, so this filter
+                        automatically includes a GET check.
+                    </p>
+
                     <pre>
-                        <code class="shell">
+                        <code class="rust">
+use warp::Filter;
+
+// Matches requests that start with `/static`,
+// and then uses the rest of that path to lookup
+// and serve a file from `/www/static`.
+let route = warp::path("static")
+    .and(warp::fs::dir("/www/static"));
+
+// For example:
+// - `GET /static/app.js` would serve the file `/www/static/app.js`
+// - `GET /static/css/app.css` would serve the file `/www/static/css/app.css`
                         </code>
                     </pre>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-lg-12">
-        <div class="card shadow mb-4">
-            <!-- Card Header - Accordion -->
-            <a href="#collapseWarpSource" class="d-block card-header py-3" data-toggle="collapse" role="button"
-               aria-expanded="true" aria-controls="collapseWarpSource">
-                <h6 class="m-0 font-weight-bold text-primary">Server static files with warp.</h6>
-            </a>
-            <!-- Card Content - Collapse -->
-            <div class="collapse show" id="collapseWarpSource">
-                <div class="card-body">
-                        <pre><code class="rust">
-                        </code></pre>
                 </div>
-                <a href="https://github.com/lumijad/ruspi-examples/blob/master/ruspi-warp/src/serve_static_files/main.rs"
-                   class="btn btn-sm header-btn">
-                    <i class="fa fa-github-alt"></i>
-                    <span>View on GitHub</span>
-                </a>
             </div>
         </div>
     </div>
-</div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card shadow mb-4">
+                <!-- Card Header - Accordion -->
+                <a href="#collapseWarpSource" class="d-block card-header py-3" data-toggle="collapse" role="button"
+                   aria-expanded="true" aria-controls="collapseWarpSource">
+                    <h6 class="m-0 font-weight-bold text-primary">A another example with 3 directories</h6>
+                </a>
+                <!-- Card Content - Collapse -->
+                <div class="collapse show" id="collapseWarpSource">
+                    <div class="card-body">
+                        <pre><code class="rust">
+use warp::Filter;
+
+#[tokio::main]
+async fn main() {
+    pretty_env_logger::init();
+
+
+    // dir already requires GET...
+    let css = warp::path("css").and(warp::fs::dir("./static/css"));
+    let font = warp::path("font").and(warp::fs::dir("./static/font"));
+    let js = warp::path("js").and(warp::fs::dir("./static/js"));
+
+    let routes = css.or(font).or(js);
+
+    warp::serve(routes).run(([127, 0, 0, 1], 8080)).await;
+}
+                        </code></pre>
+                    </div>
+                    <a href="https://github.com/lumijad/ruspi-examples/blob/master/ruspi-warp/src/serve_static_files/main.rs"
+                       class="btn btn-sm header-btn">
+                        <i class="fa fa-github-alt"></i>
+                        <span>View on GitHub</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 {{/inline}}
 {{~> (layout)~}}
