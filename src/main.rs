@@ -8,6 +8,7 @@ mod server;
 mod sse;
 mod template_engine;
 mod utils;
+mod websocket;
 
 #[tokio::main]
 async fn main() {

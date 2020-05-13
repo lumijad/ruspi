@@ -107,7 +107,7 @@ async fn main() {
     // POST /chat -> send message
     let chat_send = warp::path("chat")
         .and(warp::post())
-        .and(warp::path::param::<usize>())
+        .and(warp::path::param::&lt;usize>())
         .and(warp::body::content_length_limit(500))
         .and(
             warp::body::bytes().and_then(|body: bytes::Bytes| async move {
@@ -159,11 +159,11 @@ impl warp::reject::Reject for NotUtf8 {}
 ///
 /// - Key is their id
 /// - Value is a sender of `Message`
-type Users = Arc<Mutex<HashMap<usize, mpsc::UnboundedSender<Message>>>>;
+type Users = Arc&lt;Mutex&lt;HashMap&lt;usize, mpsc::UnboundedSender&lt;Message>>>>;
 
 fn user_connected(
     users: Users,
-) -> impl Stream<Item = Result<impl ServerSentEvent + Send + 'static, warp::Error>> + Send + 'static
+) -> impl Stream&lt;Item = Result&lt;impl ServerSentEvent + Send + 'static, warp::Error>> + Send + 'static
 {
     // Use a counter to assign a new unique ID for this user.
     let my_id = NEXT_USER_ID.fetch_add(1, Ordering::Relaxed);
@@ -189,7 +189,7 @@ fn user_connected(
 }
 
 fn user_message(my_id: usize, msg: String, users: &Users) {
-    let new_msg = format!("<User#{}>: {}", my_id, msg);
+    let new_msg = format!("&lt;User#{}>: {}", my_id, msg);
 
     // New message from this user, send it to everyone else (except same uid)...
     //

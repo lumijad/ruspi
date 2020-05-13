@@ -101,7 +101,7 @@ use tokio::time::interval;
 use warp::{sse::ServerSentEvent, Filter};
 
 // create server-sent event
-fn sse_counter(counter: u64) -> Result<impl ServerSentEvent, Infallible> {
+fn sse_counter(counter: u64) -> Result&lt;impl ServerSentEvent, Infallible> {
     Ok(warp::sse::data(counter))
 }
 
