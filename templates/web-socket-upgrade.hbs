@@ -30,7 +30,7 @@
                         Source code:
                         <pre>
                         <code class="javascript">
-var uri = 'ws://' + location.host + '/echo';
+var uri = 'wss://' + location.host + '/echo';
 var ws = new WebSocket(uri);
 
 function message(data) {
@@ -121,7 +121,7 @@ async fn main() {
         </div>
     </div>
     <script type="text/javascript">
-        var uri = 'ws://' + location.host + '/websocket/echo';
+        var uri = 'wss://' + location.host + '/websocket/echo';
         var ws = new WebSocket(uri);
 
         function message(data) {

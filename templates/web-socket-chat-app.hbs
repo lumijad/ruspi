@@ -30,7 +30,7 @@
                         Source code:
                         <pre>
                         <code class="javascript">
-var uri = 'ws://' + location.host + '/websocket/chat';
+var uri = 'wss://' + location.host + '/websocket/chat';
 var ws = new WebSocket(uri);
 
 function message(data) {
@@ -217,7 +217,7 @@ async fn user_disconnected(my_id: usize, users: &Users) {
         </div>
     </div>
     <script type="text/javascript">
-        var uri = 'ws://' + location.host + '/websocket/chat';
+        var uri = 'wss://' + location.host + '/websocket/chat';
         var ws = new WebSocket(uri);
 
         function message(data) {
