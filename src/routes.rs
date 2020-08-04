@@ -23,7 +23,7 @@ pub fn static_resources() -> impl Filter<Extract=impl warp::Reply, Error=warp::R
     let mut js = path.clone();
     js.push("static/js");
 
-    let acme = PathBuf::from("/www/vhosts/ruspi.dev/httpdocs/.well-known/acme-challenge");
+    let acme = PathBuf::from("/var/www/vhosts/ruspi.dev/httpdocs/.well-known/acme-challenge");
     let acme = warp::path(".well-known").and(warp::path("acme-challenge").and(warp::fs::dir(acme.into_os_string())));
 
 
