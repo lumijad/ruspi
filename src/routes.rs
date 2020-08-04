@@ -23,18 +23,15 @@ pub fn static_resources() -> impl Filter<Extract=impl warp::Reply, Error=warp::R
     let mut js = path.clone();
     js.push("static/js");
 
-    let wn = PathBuf::from("/www/vhosts/ruspi.dev/httpdocs/.well-known");
     let acme = PathBuf::from("/www/vhosts/ruspi.dev/httpdocs/.well-known/acme-challenge");
-
-    let wn = warp::path(".well-known").and(warp::fs::dir(wn.into_os_string()))
-        .or(warp::path("acme-challenge").and(warp::fs::dir(acme.into_os_string())));
+    let acme = warp::path(".well-known").and(warp::path("acme-challenge").and(warp::fs::dir(acme.into_os_string())));
 
 
     warp::path("assets").and(warp::fs::dir(assets.into_os_string()))
         .or(warp::path("css").and(warp::fs::dir(css.into_os_string())))
         .or(warp::path("webfonts").and(warp::fs::dir(webfonts.into_os_string())))
         .or(warp::path("js").and(warp::fs::dir(js.into_os_string())))
-        .or(wn)
+        .or(acme)
 }
 
 pub fn get_page_filters() -> impl Filter<Extract=impl warp::Reply, Error=warp::Rejection> + Clone {
